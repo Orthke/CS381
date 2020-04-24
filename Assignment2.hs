@@ -31,3 +31,4 @@ data Vals = Mynum Num Vals
   deriving (Eq,Show)
 
 
+--End of part a
