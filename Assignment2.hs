@@ -52,12 +52,10 @@ y2 = 3
 
 -- Excercise 2
 
+type Circuit = (Gates, Links)
 type Links = [Link]
-
---type Gates = [Int,Gate]  -- (Throws an error: Illegal type: `[Int, Gate]' Perhaps you intended to use DataKinds)
-
-data Circuit = Gates Links
+type Gates = [(Int,Gate)]
 
 data Gate = And | Or | Xor | Not
 
-data Link = L (Int, Int) (Int, Int)
+data Link  = L (Int, Int) (Int, Int)
