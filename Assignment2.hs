@@ -27,8 +27,22 @@ data Pars = Myname3 Name Pars
 
 
 data Vals = Mynum Num Vals
-          | Myname2 Name
+          | Mynum2 Num
   deriving (Eq,Show)
 
 
 --End of part a
+
+
+-- Part b
+vector = Def "vector" [x1, y1, x2, y2] [ pen down, Moveto(x1,y1), Moveto(x2,y2), pen up]
+
+
+-- Part c
+steps :: Int -> Cmd
+steps 0 = []
+steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stairs(n)
+
+stepsHelper :: Int -> Cmd
+stepsHelper 0 = []
+stepsHelper n = [Moveto(I n-1, I n), Moveto(I n-1, I n-1)] ++ stepsHelper(n-1)
