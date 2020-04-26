@@ -36,7 +36,7 @@ x1 = 2
 x2 = 4
 y1 = 2
 y2 = 3
-vector = Define "vector" [x1, y1, x2, y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+--vector = Define "vector" [x1, y1, x2, y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 -- Part c
@@ -47,3 +47,17 @@ vector = Define "vector" [x1, y1, x2, y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y
 --stepsHelper :: Int -> Cmd
 --stepsHelper 0 = []
 --stepsHelper n = [Moveto(I n-1, I n), Moveto(I n-1, I n-1)] ++ stepsHelper(n-1)
+
+
+
+-- Excercise 2
+
+type Links = [Link]
+
+--type Gates = [Int,Gate]  -- (Throws an error: Illegal type: `[Int, Gate]' Perhaps you intended to use DataKinds)
+
+data Circuit = Gates Links
+
+data Gate = And | Or | Xor | Not
+
+data Link = L (Int, Int) (Int, Int)
