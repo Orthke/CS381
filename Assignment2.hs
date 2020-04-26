@@ -1,13 +1,11 @@
 import Prelude hiding (Num)
 
-type Num = Int
-type Name = String
-
+type Prog = [Cmd]
 
 data Cmd = Pen Mode
          | Moveto Pos Pos
-         | Define Name [Pars] Cmd
-         | Call Name [Name]
+         | Define String Pars Prog
+         | Call String Vals
   deriving (Eq,Show)
 
 
@@ -16,33 +14,36 @@ data Mode = Down
   deriving (Eq,Show)
 
 
-data Pos = Num
-          | Myname Name
+data Pos = I Int
+          | S String
   deriving (Eq,Show)
 
 
-data Pars = Myname3 Name Pars
-          | Myname4 Name
+data Pars = S1 String Pars
+          | S2 String
   deriving (Eq,Show)
 
 
-data Vals = Mynum Num Vals
-          | Mynum2 Num
+data Vals = I1 Int Vals
+          | I2 Int
   deriving (Eq,Show)
-
 
 --End of part a
 
 
 -- Part b
-vector = Def "vector" [x1, y1, x2, y2] [ pen down, Moveto(x1,y1), Moveto(x2,y2), pen up]
+x1 = 2
+x2 = 4
+y1 = 2
+y2 = 3
+vector = Define "vector" [x1, y1, x2, y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 -- Part c
-steps :: Int -> Cmd
-steps 0 = []
-steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stairs(n)
+--steps :: Int -> Cmd
+--steps 0 = []
+--steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stairs(n)
 
-stepsHelper :: Int -> Cmd
-stepsHelper 0 = []
-stepsHelper n = [Moveto(I n-1, I n), Moveto(I n-1, I n-1)] ++ stepsHelper(n-1)
+--stepsHelper :: Int -> Cmd
+--stepsHelper 0 = []
+--stepsHelper n = [Moveto(I n-1, I n), Moveto(I n-1, I n-1)] ++ stepsHelper(n-1)
