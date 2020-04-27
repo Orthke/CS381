@@ -35,7 +35,7 @@ data Vals = I1 Int Vals
 
 
 --  Part b 
-vector = Define "vector" (S2 "x1") [Pen Down, Pen Up]--[Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+vector = Define "vector" (S1 "x1" (S1 "x2" (S1 "y1" (S2 "y2")))) [Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 --  Part c 
