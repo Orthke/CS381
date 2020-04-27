@@ -67,4 +67,9 @@ data Link  = L (Int, Int) (Int, Int)
 
 
 --  Part b
-halfAdder = ([(1, Xor), (2, And)], [ L (1,1) (2,1) , L ( 1,2) (2,2)])
+
+halfAdder :: Circuit
+halfAdder = ([(1, Xor), (2, And)], [L (1,1) (2,1), L ( 1,2) (2,2)])
+
+
+--  Part c
