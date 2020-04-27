@@ -59,10 +59,10 @@ stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(
 type Circuit = (Gates, Links)
 
 type Gates = [(Int, GateFn)]
-data GateFn = And | Or | Xor | Not
+data GateFn = And | Or | Xor | Not deriving Show
 
 type Links = [Link]
-data Link  = L (Int, Int) (Int, Int)
+data Link  = L (Int, Int) (Int, Int) deriving Show
 
 
 
@@ -73,3 +73,4 @@ halfAdder = ([(1, Xor), (2, And)], [L (1,1) (2,1), L ( 1,2) (2,2)])
 
 
 --  Part c
+
