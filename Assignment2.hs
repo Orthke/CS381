@@ -1,5 +1,13 @@
 import Prelude hiding (Num)
 
+
+-- #################################
+--            Excercise 1
+-- #################################
+
+
+--  Part a 
+
 type Program = [Cmd]
 
 data Cmd = Pen Mode
@@ -28,10 +36,9 @@ data Vals = I1 Int Vals
           | I2 Int
   deriving (Eq,Show)
 
---End of part a
 
+--  Part b 
 
--- Part b
 --x1 = 2
 --x2 = 4
 --y1 = 2
@@ -39,7 +46,8 @@ data Vals = I1 Int Vals
 --vector = Def "vector" [Pos x1, Pos y1, Pos x2, Pos y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
--- Part c
+--  Part c 
+
 steps :: Int -> Program
 steps 0 = []
 steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stepsHelper(n)
@@ -50,13 +58,19 @@ stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(
 
 
 
--- Excercise 2
+
+-- #################################
+--            Excercise 2
+-- #################################
+
+
+--  Part a 
 
 type Circuit = (Gates, Links)
 type Links = [Link]
-
 type Gates = [(Int,Gate)]
-
 data Gate = And | Or | Xor | Not
-
 data Link  = L (Int, Int) (Int, Int)
+
+
+--  Part b
