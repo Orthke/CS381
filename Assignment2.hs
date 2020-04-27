@@ -1,4 +1,4 @@
---Contributors: Carl Bohme, Kelton Orth, Timothy Wiliusa
+--Contributors: Carl Bohme, Kelton Orth, Timothy Wiliusa, Trevor Byko
 
 -- #################################
 --            Excercise 1
@@ -11,27 +11,27 @@ data Cmd = Pen Mode
          | Moveto (Pos, Pos)
          | Define String Pars [Cmd]
          | Call String Vals
-  deriving (Eq,Show)
+        deriving (Eq,Show)
 
 
 data Mode = Down
           | Up
-  deriving (Eq,Show)
+        deriving (Eq,Show)
 
 
 data Pos = I Int
           | S String
-  deriving (Eq,Show)
+          deriving (Eq,Show)
 
 
 data Pars = S1 String Pars
           | S2 String
-  deriving (Eq,Show)
+          deriving (Eq,Show)
 
 
 data Vals = I1 Int Vals
           | I2 Int
-  deriving (Eq,Show)
+          deriving (Eq,Show)
 
 
 --  Part b 
@@ -62,14 +62,13 @@ stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(
 
 --  Part a 
 
-type Circuit = (Gates, Links)
+type Circuit    = (Gates, Links)
 
-type Gates = [(Int, GateFn)]
-data GateFn = And | Or | Xor | Not deriving Show
+type Gates      = [(Int, GateFn)]
+data GateFn     = And | Or | Xor | Not deriving Show
 
-type Links = [Link]
-data Link  = L (Int, Int) (Int, Int) deriving Show
-
+type Links      = [Link]
+data Link       = L (Int, Int) (Int, Int) deriving Show
 
 
 --  Part b
