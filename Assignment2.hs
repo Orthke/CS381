@@ -12,7 +12,7 @@ type Program = [Cmd]
 
 data Cmd = Pen Mode
          | Moveto (Pos, Pos)
-         | Define String Pars Cmd
+         | Define String Pars Program
          | Call String Vals
   deriving (Eq,Show)
 
@@ -39,11 +39,11 @@ data Vals = I1 Int Vals
 
 --  Part b 
 
---x1 = 2
---x2 = 4
---y1 = 2
---y2 = 3
---vector = Def "vector" [Pos x1, Pos y1, Pos x2, Pos y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+x1 = I 2
+x2 = I 4
+y1 = I 2
+y2 = I 3
+--vector = Define "vector" [x1, y1, x2, y2] [Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 --  Part c 
