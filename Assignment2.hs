@@ -1,5 +1,4 @@
-import Prelude hiding (Num)
-
+--Contributors: Carl Bohme, Kelton Orth, Timothy Wiliusa
 
 -- #################################
 --            Excercise 1
@@ -8,11 +7,9 @@ import Prelude hiding (Num)
 
 --  Part a 
 
-type Program = [Cmd]
-
 data Cmd = Pen Mode
          | Moveto (Pos, Pos)
-         | Define String Pars Program
+         | Define String Pars [Cmd]
          | Call String Vals
   deriving (Eq,Show)
 
@@ -38,21 +35,20 @@ data Vals = I1 Int Vals
 
 
 --  Part b 
-
-x1 = I 2
+x1 = I 4
 x2 = I 4
 y1 = I 2
 y2 = I 3
---vector = Define "vector" [x1, y1, x2, y2] [Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+--vector = Define "vector" (S2(1) S2(2) S2(2) S1(4)) [Pen Down, Pen Up]--[Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 --  Part c 
 
-steps :: Int -> Program
+steps :: Int -> [Cmd]
 steps 0 = []
 steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stepsHelper(n)
 
-stepsHelper :: Int -> Program
+stepsHelper :: Int -> [Cmd]
 stepsHelper 0 = []
 stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(n-1)
 
@@ -66,9 +62,7 @@ stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(
 
 --  Part a 
 
-type Circuit = (Gates, Links)
-type Links = [Link]
-type Gates = [(Int,Gate)]
+type Circuit = ((Int,Gate), [Link])
 data Gate = And | Or | Xor | Not
 data Link  = L (Int, Int) (Int, Int)
 
