@@ -1,10 +1,10 @@
 import Prelude hiding (Num)
 
-type Prog = [Cmd]
+type Program = [Cmd]
 
 data Cmd = Pen Mode
-         | Moveto Pos Pos
-         | Define String Pars Prog
+         | Moveto (Pos, Pos)
+         | Define String Pars Cmd
          | Call String Vals
   deriving (Eq,Show)
 
@@ -32,21 +32,21 @@ data Vals = I1 Int Vals
 
 
 -- Part b
-x1 = 2
-x2 = 4
-y1 = 2
-y2 = 3
---vector = Define "vector" [x1, y1, x2, y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+--x1 = 2
+--x2 = 4
+--y1 = 2
+--y2 = 3
+vector = Def "vector" [Pos x1, Pos y1, Pos x2, Pos y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 -- Part c
---steps :: Int -> Cmd
---steps 0 = []
---steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stairs(n)
+steps :: Int -> Program
+steps 0 = []
+steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stepsHelper(n)
 
---stepsHelper :: Int -> Cmd
---stepsHelper 0 = []
---stepsHelper n = [Moveto(I n-1, I n), Moveto(I n-1, I n-1)] ++ stepsHelper(n-1)
+stepsHelper :: Int -> Program
+stepsHelper 0 = []
+stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(n-1)
 
 
 
@@ -54,7 +54,7 @@ y2 = 3
 
 type Links = [Link]
 
---type Gates = [Int,Gate]  -- (Throws an error: Illegal type: `[Int, Gate]' Perhaps you intended to use DataKinds)
+type Gates = [(Int,Gate)]  -- (Throws an error: Illegal type: `[Int, Gate]' Perhaps you intended to use DataKinds)
 
 data Circuit = Gates Links
 
