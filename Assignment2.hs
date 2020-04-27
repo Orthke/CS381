@@ -35,7 +35,7 @@ data Vals = I1 Int Vals
 
 
 --  Part b 
-vector = Define "vector" (S1 "x1" (S1 "x2" (S1 "y1" (S2 "y2")))) [Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+--vector = Define "vector" (S1 "x1" (S1 "x2" (S1 "y1" (S2 "y2")))) [Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 --  Part c 
@@ -56,9 +56,15 @@ stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(
 
 --  Part a 
 
-type Circuit = ((Int,Gate), [Link])
-data Gate = And | Or | Xor | Not
+type Circuit = (Gates, Links)
+
+type Gates = [(Int, GateFn)]
+data GateFn = And | Or | Xor | Not
+
+type Links = [Link]
 data Link  = L (Int, Int) (Int, Int)
 
 
+
 --  Part b
+halfAdder = ([(1, Xor), (2, And)], [ L (1,1) (2,1) , L ( 1,2) (2,2)])
