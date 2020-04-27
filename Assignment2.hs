@@ -35,11 +35,7 @@ data Vals = I1 Int Vals
 
 
 --  Part b 
-x1 = I 4
-x2 = I 4
-y1 = I 2
-y2 = I 3
---vector = Define "vector" (S2(1) S2(2) S2(2) S1(4)) [Pen Down, Pen Up]--[Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+vector = Define "vector" (S2 "x1") [Pen Down, Pen Up]--[Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 --  Part c 
@@ -51,8 +47,6 @@ steps n = [Pen Up, Moveto(I n, I n), Pen Down] ++ stepsHelper(n)
 stepsHelper :: Int -> [Cmd]
 stepsHelper 0 = []
 stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(n-1)
-
-
 
 
 -- #################################
