@@ -36,7 +36,7 @@ data Vals = I1 Int Vals
 --x2 = 4
 --y1 = 2
 --y2 = 3
-vector = Def "vector" [Pos x1, Pos y1, Pos x2, Pos y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
+--vector = Def "vector" [Pos x1, Pos y1, Pos x2, Pos y2] [ Pen Down, Moveto(x1,y1), Moveto(x2,y2), Pen Up]
 
 
 -- Part c
