@@ -65,10 +65,12 @@ stepsHelper n = [Moveto(I (n-1), I n), Moveto(I (n-1), I (n-1))] ++ stepsHelper(
 type Circuit    = (Gates, Links)
 
 type Gates      = [(Int, GateFn)]
-data GateFn     = And | Or | Xor | Not deriving Show
+data GateFn     = And | Or | Xor | Not
+  deriving (Eq,Show)
 
 type Links      = [Link]
-data Link       = L (Int, Int) (Int, Int) deriving Show
+data Link       = L (Int, Int) (Int, Int)
+  deriving (Eq,Show)
 
 
 --  Part b
@@ -78,3 +80,14 @@ halfAdder = ([(1, Xor), (2, And)], [L (1,1) (2,1), L ( 1,2) (2,2)])
 
 
 --  Part c
+
+ppGates :: Gates -> String
+ppGates [] = ""
+ppGates ((i,g):gs) =  show i ++ " : " ++ show g  ++ " ; " ++ ppGates gs
+
+ppLinks :: Links -> String
+ppLinks [] = ""
+ppLinks (L(f1,f2)(t1,t2):lx) = " from " ++ show f1 ++ "." ++ show f2 ++ " to " ++ show t1 ++ "." ++ show t2 ++ ppLinks lx
+
+prettyPrint :: Circuit -> String
+prettyPrint (g, l) = ppGates g ++ ppLinks l
