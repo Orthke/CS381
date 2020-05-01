@@ -4,40 +4,27 @@
 --            Excercise 1
 -- #################################
 
-type Prog   =   [cmd]
+type Prog = [Cmd]
 
-data cmd = LD Int
+data Cmd = LD Int
          | ADD
          | MULT
          | DUP
+  deriving(Show)
 
-type stack = [Int]
+type Stack = [Int]
 
---sem :: Prog -> D
---sem [] = []
---sem (x:xs) = ???
+type D = Stack -> Stack
+ 
+sem :: Prog -> D
+sem [] a = a
+sem (x:xs) a = sem xs (semCmd x a)
 
---semcmd :: cmd -> D
---semcmd LD     =
---semcmd ADD    =
---semcmd MULT   =
---semcmd DUP    =
+semcmd :: Cmd -> D
+semcmd (LD a)  xs         = [a] ++ xs
+semCmd (ADD)   (s1:s2:xs) = [s1+s2] ++ xs
+semCmd (MULT)  (s1:s2:xs) = [s1*s2] ++ xs
+semCmd (DUP)   (s1:xs)    = [s1,s1] ++ xs
+semCmd _       _          = []
 
 
--- #################################
---            Excercise 2
--- #################################
-
-type State = (Mode,Int,Int)
-
-type Line  = (Int,Int,Int,Int)
-type Lines = [Line]
-
---semS :: Cmd -> State -> (State,Lines)
---semS LD   =
---semS ADD  =
---semS MULT =
---semS DUP  =
-
---should call semS
---sem' :: Cmd -> Lines
