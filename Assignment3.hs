@@ -13,18 +13,21 @@ data Cmd = LD Int
   deriving(Show)
 
 type Stack = [Int]
-
-type D = Stack -> Stack
  
-sem :: Prog -> D
+sem :: Prog -> Maybe Stack -> Maybe Stack
 sem [] a = a
 sem (x:xs) a = sem xs (semCmd x a)
 
-semcmd :: Cmd -> D
-semcmd (LD a)  xs         = [a] ++ xs
-semCmd (ADD)   (s1:s2:xs) = [s1+s2] ++ xs
-semCmd (MULT)  (s1:s2:xs) = [s1*s2] ++ xs
-semCmd (DUP)   (s1:xs)    = [s1,s1] ++ xs
-semCmd _       _          = []
 
+semCmd :: Cmd -> Maybe Stack -> Maybe Stack
+semCmd (LD i) _ = Just [i]
+semCmd (ADD) (s) = case s of
+                      Just (i1:i2:xs) -> Just ((i1 + i2):(xs))
+                      _               -> Nothing
+semCmd (MULT) (s) = case s of
+                    Just (i1:i2:xs) -> Just ((i1 * i2):(xs))
+                    _               -> Nothing
+semCmd (DUP) (s) = case s of
+                   Just (i1:xs) -> Just (i1:i1:xs)
+                   _            -> Nothing
 
