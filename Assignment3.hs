@@ -15,8 +15,9 @@ data Cmd = LD Int
 type Stack = [Int]
  
 sem :: Prog -> Maybe Stack -> Maybe Stack
-sem [] a = a
-sem (x:xs) a = sem xs (semCmd x a)
+sem [] (Just a)     = (Just a)
+sem (x:xs) (Just a) = sem xs (semCmd x (Just a))
+sem _ _             = Nothing
 
 
 semCmd :: Cmd -> Maybe Stack -> Maybe Stack
