@@ -2,6 +2,8 @@
 --            Excercise 2
 -- #################################
 
+module MiniLogo where
+
 data Cmd = Pen Mode
          | MoveTo Int Int
          | Seq Cmd Cmd
