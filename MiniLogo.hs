@@ -5,8 +5,10 @@
 data Cmd = Pen Mode
          | MoveTo Int Int
          | Seq Cmd Cmd
+  deriving (Eq)
 
 data Mode = Up | Down
+  deriving (Eq)
 
 type State = (Mode,Int,Int)
 type Line  = (Int,Int,Int,Int)
