@@ -14,6 +14,7 @@ type State = (Mode,Int,Int)
 type Line  = (Int,Int,Int,Int)
 type Lines = [Line]
 
+
 semS :: Cmd -> State -> (State,Lines)
 semS (Pen m1) (m2,i1,i2)        = ((m1,i1,i2),[])
 semS (MoveTo i1 i2) (m1,i3,i4)  | m1 == Down    = ((m1,i1,i2),[(i3,i4,i1,i2)])
@@ -22,4 +23,8 @@ semS (MoveTo i1 i2) (m1,i3,i4)  | m1 == Down    = ((m1,i1,i2),[(i3,i4,i1,i2)])
  
 --semS (c:cs) (m, x, y) = ((m,x,y),([x]))
 
+
 --sem' :: Cmd -> Lines
+--sem' (Pen m1)       = semS (Pen m1) (UP,0,0)
+--sem' (MoveTo i1 i2) = semS (MoveTo i1 i2) (UP,0,0)
+--sem' (Seq c1 c2)    =
