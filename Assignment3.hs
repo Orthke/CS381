@@ -22,7 +22,8 @@ sem _ _             = Nothing
 fromJust (Just x) = x
 
 semCmd :: Cmd -> Maybe Stack -> Maybe Stack
-semCmd (LD x) _ = Just [x]
+semCmd (LD x) st = case st of
+                      Just (xs) -> Just ([x]++(xs))
 semCmd (ADD) st  = case st of
                       Just (s1:s2:xs) -> Just ((s1 + s2):(xs))
                       _               -> Nothing
