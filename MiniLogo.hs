@@ -19,12 +19,10 @@ semS :: Cmd -> State -> (State,Lines)
 semS (Pen m1) (m2,i1,i2)        = ((m1,i1,i2),[])
 semS (MoveTo i1 i2) (m1,i3,i4)  | m1 == Down    = ((m1,i1,i2),[(i3,i4,i1,i2)])
                                 | otherwise     = ((m1,i1,i2),[])
---semS (Seq c1 c2) (m1,i3,i4)     = semS c1 (m1,i3,i4)
+semS (Seq c1 c2) (m1,i1,i2)     = (fst (semS c2 (fst (semS c1 (m1,i1,i2)))), (snd (semS c1 (m1,i1,i2))++(snd (semS c2 (fst (semS c1 (m1,i1,i2)))))) )
  
---semS (c:cs) (m, x, y) = ((m,x,y),([x]))
+
+sem' :: Cmd -> Lines
+sem' c = snd (semS c (Up,0,0))
 
 
---sem' :: Cmd -> Lines
---sem' (Pen m1)       = semS (Pen m1) (UP,0,0)
---sem' (MoveTo i1 i2) = semS (MoveTo i1 i2) (UP,0,0)
---sem' (Seq c1 c2)    =
