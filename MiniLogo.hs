@@ -2,6 +2,8 @@
 --            Excercise 2
 -- #################################
 
+module MiniLogo where
+
 data Cmd = Pen Mode
          | MoveTo Int Int
          | Seq Cmd Cmd
@@ -26,3 +28,6 @@ sem' :: Cmd -> Lines
 sem' c = snd (semS c (Up,0,0))
 
 
+-- Testing Code
+-- sem' (Seq (Pen Up) (Seq (MoveTo 1 2) (Seq (Pen Down) (Seq (MoveTo 3 4) (Seq (Pen Up) (Seq (MoveTo 5 6) (Seq (Pen Down) (Seq (MoveTo 7 8) (Pen Up) ))))))))
+-- Expercted Result: [(1,2,3,4),(5,6,7,8)]
