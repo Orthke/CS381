@@ -32,8 +32,3 @@ semCmd (MULT) st = case st of
 semCmd (DUP) st  = case st of
                       Just (s1:xs)    -> Just (s1:s1:xs)
                       _               -> Nothing
-
-
--- #################################
---            Excercise 2
--- #################################
