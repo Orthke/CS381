@@ -13,15 +13,16 @@ data Cmd = LD Int
 
 type Stack = [Int]
  
+type D = Maybe Stack -> Maybe Stack
 
-sem :: Prog -> Maybe Stack -> Maybe Stack
+sem :: Prog -> D
 sem [] (Just a)     = (Just a)
 sem (x:xs) (Just a) = sem xs (semCmd x (Just a))
 sem _ _             = Nothing
 
 fromJust (Just x) = x
 
-semCmd :: Cmd -> Maybe Stack -> Maybe Stack
+semCmd :: Cmd -> D
 semCmd (LD x) st = case st of
                       Just (xs) -> Just ([x]++(xs))
 semCmd (ADD) st  = case st of
