@@ -32,3 +32,25 @@ semCmd (DUP) (s) = case s of
                    Just (i1:xs) -> Just (i1:i1:xs)
                    _            -> Nothing
 
+
+
+-- #################################
+--            Excercise 2
+-- #################################
+
+--data Cmd  = Pen Mode
+--          | MoveTo Int Int
+--          | Seq Cmd Cmd
+
+data Mode = Up | Down
+
+type State = (Mode,Int,Int)
+
+type Line = (Int,Int,Int,Int)
+type Lines = [Line]
+
+
+--semS :: Cmd -> State -> (State,Lines)
+
+
+--sem' :: Cmd -> Lines
