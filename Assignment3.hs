@@ -10,25 +10,25 @@ data Cmd = LD Int
          | ADD
          | MULT
          | DUP
-  deriving(Show)
 
 type Stack = [Int]
  
+
 sem :: Prog -> Maybe Stack -> Maybe Stack
 sem [] (Just a)     = (Just a)
 sem (x:xs) (Just a) = sem xs (semCmd x (Just a))
 sem _ _             = Nothing
 
+fromJust (Just x) = x
 
 semCmd :: Cmd -> Maybe Stack -> Maybe Stack
-semCmd (LD i) _ = Just [i]
-semCmd (ADD) (s) = case s of
-                      Just (i1:i2:xs) -> Just ((i1 + i2):(xs))
+semCmd (LD x) _ = Just [x]
+semCmd (ADD) st  = case st of
+                      Just (s1:s2:xs) -> Just ((s1 + s2):(xs))
                       _               -> Nothing
-semCmd (MULT) (s) = case s of
-                    Just (i1:i2:xs) -> Just ((i1 * i2):(xs))
-                    _               -> Nothing
-semCmd (DUP) (s) = case s of
-                   Just (i1:xs) -> Just (i1:i1:xs)
-                   _            -> Nothing
-
+semCmd (MULT) st = case st of
+                      Just (s1:s2:xs) -> Just ((s1 * s2):(xs))
+                      _               -> Nothing
+semCmd (DUP) st  = case st of
+                      Just (s1:xs)    -> Just (s1:s1:xs)
+                      _               -> Nothing
