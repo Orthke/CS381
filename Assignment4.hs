@@ -1,5 +1,7 @@
 --Contributors: Carl Bohme, Kelton Orth, Timothy Wiliusa, Trevor Byko
 
+--Probably not a good idea to copy exactly from https://github.com/bramwelt/CS381-SP13/blob/master/assignment3/Homework3.hs
+
 -- #################################
 --            Excercise 1
 -- #################################
